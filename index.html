@@ -1,56 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For you 🤍</title>
+  <title>Valentine Letter 💌</title>
   <style>
     body {
-      background: #fff0f5;
-      font-family: 'Arial', sans-serif;
+      margin: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      background: #0b1c2d;
+      font-family: 'Georgia', serif;
     }
 
-    .card {
-      background: white;
-      padding: 30px;
-      max-width: 400px;
+    .tapiz {
+      background: #fff7f2;
+      width: 320px;
+      height: 220px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .tapiz::before {
+      content: "❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤";
+      position: absolute;
+      font-size: 18px;
+      opacity: 0.2;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(100%); }
+      to { transform: translateY(-100%); }
+    }
+
+    .envelope {
+      width: 80px;
+      height: 50px;
+      position: relative;
+      transition: transform 0.6s;
+    }
+
+    .tapiz:hover .envelope {
+      transform: scale(1.1);
+    }
+
+    .envelope:before,
+    .envelope:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid #d16ba5;
+      background: #fde2e4;
+    }
+
+    .envelope:after {
+      transform: rotateX(180deg);
+    }
+
+    .text-front {
+      margin-top: 70px;
+      font-size: 14px;
+      color: #444;
       text-align: center;
+    }
+
+    .letter {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .letter-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+      animation: open 0.6s ease;
+    }
+
+    @keyframes open {
+      from {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .letter-content h2 {
+      color: #d16ba5;
+    }
+
+    .close {
+      margin-top: 20px;
+      background: #d16ba5;
+      color: white;
+      border: none;
+      padding: 8px 16px;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      color: #e75480;
-    }
-
-    p {
-      color: #555;
-      line-height: 1.6;
-    }
-
-    .heart {
-      font-size: 30px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="heart">💌</div>
-    <h1>For you</h1>
-    <p>
-      Even with miles between us, my heart keeps choosing you every single day.
-    </p>
-    <p>
-      This little page is just a reminder that someone out here loves you deeply 🤍
-    </p>
-    <p>
-      Happy Valentine’s Day.
-    </p>
+
+  <div class="tapiz" onclick="openLetter()">
+    <div class="envelope"></div>
+    <div class="text-front">💌 Letter for you</div>
   </div>
+
+  <div class="letter" id="letter">
+    <div class="letter-content">
+      <h2>Para ti 💖</h2>
+      <p>
+        Desde que llegaste, todo es más bonito.<br>
+        Gracias por existir, por tu risa y por tu forma de quererme.<br><br>
+        Feliz San Valentín 💕
+      </p>
+      <button class="close" onclick="closeLetter()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    function openLetter() {
+      document.getElementById("letter").style.display = "flex";
+    }
+
+    function closeLetter() {
+      document.getElementById("letter").style.display = "none";
+    }
+  </script>
+
 </body>
 </html>
